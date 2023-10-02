@@ -1,0 +1,29 @@
+{{define "Field"}}{{$indent := .Indent}}{{range .PrettyComments}}{{$indent}}//{{.}}
+{{end}}
+{{- .Indent}}{{.DataType.MustProtoTypeString}} {{.Name}} = {{.TagNum}};
+{{end}}
+
+{{define "PluralField"}}{{$indent := .Indent}}{{range .PrettyComments}}{{$indent}}//{{.}}
+{{end}}
+{{- .Indent}}repeated {{.DataType.MustProtoTypeString}} {{.CleanPluralName}} = {{.TagNum}};
+{{end}}
+
+{{define "Message"}}{{range .PrettyComments}}//{{.}}
+{{end}}message {{.Name}} {
+{{range .Fields}}{{template "Field" .}}{{end}}}
+
+// Plural Vesion of {{.Name}}.
+{{range .PrettyComments}}//{{.}}
+{{end}}message {{.CleanPluralName}} {
+{{range .Fields}}{{template "PluralField" .}}{{end}}}
+{{end}}
+
+{{define "ProtoFile"}}syntax = "proto3";
+
+{{range .PrettyComments}}//{{.}}
+{{end}}package {{.PackageName}};
+
+{{range .Options}}option {{.Name}} = {{.Value}};
+{{end}}{{range .Structs}}
+{{template "Message" .}}{{end}}
+{{- end}}

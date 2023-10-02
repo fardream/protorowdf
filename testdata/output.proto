@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+// Test package for row/dataframe generation for protobuf.
+//   comment can start with some spaces/indents.
+//
+// blank lines will be conserved if they are in between non-empty lines.
+package pkg.name;
+
+option go_package = "example.com/what/a/good/package";
+option optimize_for = CODE_SIZE;
+option cc_enable_arenas = true;
+
+// Struct comments are similar to file comments.
+message ARowStruct {
+  // comments on data field.
+  // can also be multiple lines.
+  int64 density = 1;
+  // more comment on another field.
+  string string_field = 2;
+}
+
+// Plural Vesion of ARowStruct.
+// Struct comments are similar to file comments.
+message ARowStructs {
+  // comments on data field.
+  // can also be multiple lines.
+  repeated int64 densities = 1;
+  // more comment on another field.
+  repeated string string_fields = 2;
+}
+
+// This is another struct's comment.
+//
+// And you should be able to put a blank line here too.
+message AnotherRowStruct {
+  string adata = 2;
+  fixed32 anotherdata = 3;
+}
+
+// Plural Vesion of AnotherRowStruct.
+// This is another struct's comment.
+//
+// And you should be able to put a blank line here too.
+message AnotherRowStructs {
+  repeated string adatas = 2;
+  repeated fixed32 anotherdatas = 3;
+}

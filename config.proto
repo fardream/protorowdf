@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package protorowdf;
+
+option go_package = "github.com/fardream/protorowdf";
+
+// SupportedType limits the types that we support.
+// Those types are their proto types with first letter capitalized, except for
+// Unknown.
+enum SupportedType {
+  Unknown = 0;
+  Int64 = 1;
+  Int32 = 2;
+  Uint64 = 3;
+  Uint32 = 4;
+  Sint64 = 5;
+  Sint32 = 6;
+  Fixed64 = 7;
+  Fixed32 = 8;
+  Sfixed64 = 9;
+  Sfixed32 = 10;
+  Bool = 11;
+  String = 12;
+  Bytes = 13;
+}
+
+// Field represents a field of generated proto message defintion.
+message Field {
+  // name of the field, it will be used in the message for row.
+  string name = 1;
+  // name of the field when it's in the dataframe/column message.
+  // If no plural_name is provided, name + "s" will be used.
+  string plural_name = 2;
+
+  // type of the data.
+  SupportedType data_type = 11;
+  // tag num
+  int32 tag_num = 12;
+  // comments will be copied over with the beginning spaces and
+  // trailing spaces will be removed, otherwise it's verbatim copied over
+  // including blank lines and indents.
+  string comment = 21;
+  // indent of the field, 2 spaces if set to empty.
+  // this can also be set in the [ProtoFile] message.
+  string indent = 42;
+}
+
+// Struct represents the structure of the message.
+message Struct {
+  // name of the generate row message type.
+  string name = 1;
+  // name of the dataframe message type. use name + "s" if unset.
+  string plural_name = 2;
+  // fields for the struct.
+  repeated Field fields = 11;
+  // comments will be copied over with the beginning spaces and
+  // trailing spaces will be removed, otherwise it's verbatim copied over
+  // including blank lines and indents.
+  string comment = 21;
+}
+
+// Option for this protofile
+message Option {
+  string name = 1;
+  string value = 2;
+}
+
+// ProtoFile defines the structure of the protofile.
+message ProtoFile {
+  // package name
+  string package_name = 1;
+  // messages contained in this file, note each Struct generate two message
+  // types.
+  repeated Struct structs = 11;
+  // Options
+  repeated Option options = 21;
+  // comments will be copied over with the beginning spaces and
+  // trailing spaces will be removed, otherwise it's verbatim copied over
+  // including blank lines and indents.
+  string comment = 31;
+  // indent of fields for the fields contained in this file.
+  string field_indent = 42;
+}
