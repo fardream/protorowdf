@@ -6,7 +6,7 @@ comment: |
 package_name: pkg.name
 options:
   - name: go_package
-    value: "\"example.com/what/a/good/package\""
+    value: '"example.com/what/a/good/package"'
   - name: optimize_for
     value: CODE_SIZE
   - name: cc_enable_arenas
@@ -18,15 +18,17 @@ structs:
     fields:
       - name: density
         plural_name: densities
-        data_type: Int64
+        data_type: int64
         comment: |
           comments on data field.
           can also be multiple lines.
         tag_num: 1
       - name: string_field
-        data_type: String
+        data_type: string
         tag_num: 2
         comment: | # notice leading blank lines will be trimmed.
+
+
 
           more comment on another field.
 

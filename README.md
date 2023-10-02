@@ -38,6 +38,7 @@ structs:
         comment: | # notice leading blank lines will be trimmed.
 
 
+
           more comment on another field.
 
   - name: AnotherRowStruct
@@ -78,7 +79,7 @@ message ARowStruct {
   string string_field = 2;
 }
 
-// Plural Vesion of ARowStruct.
+// Plural Version of ARowStruct.
 // Struct comments are similar to file comments.
 message ARowStructs {
   // comments on data field.
@@ -96,7 +97,7 @@ message AnotherRowStruct {
   fixed32 anotherdata = 3;
 }
 
-// Plural Vesion of AnotherRowStruct.
+// Plural Version of AnotherRowStruct.
 // This is another struct's comment.
 //
 // And you should be able to put a blank line here too.
