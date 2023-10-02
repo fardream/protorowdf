@@ -22,6 +22,8 @@ enum SupportedType {
   Bool = 11;
   String = 12;
   Bytes = 13;
+  Float = 14;
+  Double = 15;
 }
 
 // Field represents a field of generated proto message defintion.

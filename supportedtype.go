@@ -17,10 +17,14 @@ func (t SupportedType) ProtoTypeString() (string, error) {
 		return "bool", nil
 	case SupportedType_Bytes:
 		return "bytes", nil
+	case SupportedType_Double:
+		return "double", nil
 	case SupportedType_Fixed32:
 		return "fixed32", nil
 	case SupportedType_Fixed64:
 		return "fixed64", nil
+	case SupportedType_Float:
+		return "float", nil
 	case SupportedType_Int32:
 		return "int32", nil
 	case SupportedType_Int64:
