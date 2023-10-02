@@ -12,7 +12,7 @@
 {{end}}message {{.Name}} {
 {{range .Fields}}{{template "Field" .}}{{end}}}
 
-// Plural Vesion of {{.Name}}.
+// Plural Version of {{.Name}}.
 {{range .PrettyComments}}//{{.}}
 {{end}}message {{.CleanPluralName}} {
 {{range .Fields}}{{template "PluralField" .}}{{end}}}
