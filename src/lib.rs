@@ -9,8 +9,10 @@ include!(concat!(env!("OUT_DIR"), "/protorowdf.rs"));
 static NAME_TO_SUPPORTED_TYPE: phf::Map<&'static str, SupportedType> = phf_map! {
     "bool" => SupportedType::Bool,
     "bytes" => SupportedType::Bytes,
+    "double" => SupportedType::Double,
     "fixed32" => SupportedType::Fixed32,
     "fixed64" => SupportedType::Fixed64,
+    "float" => SupportedType::Float,
     "int32" => SupportedType::Int32,
     "int64" => SupportedType::Int64,
     "sfixed32" => SupportedType::Sfixed32,
