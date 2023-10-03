@@ -28,8 +28,10 @@ impl SupportedType {
         match self {
             SupportedType::Bool => "bool".to_owned(),
             SupportedType::Bytes => "bytes".to_owned(),
+            SupportedType::Double => "double".to_owned(),
             SupportedType::Fixed32 => "fixed32".to_owned(),
             SupportedType::Fixed64 => "fixed64".to_owned(),
+            SupportedType::Float => "float".to_owned(),
             SupportedType::Int32 => "int32".to_owned(),
             SupportedType::Int64 => "int64".to_owned(),
             SupportedType::Sfixed32 => "sfixed32".to_owned(),
