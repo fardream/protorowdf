@@ -27,10 +27,25 @@ structs:
         data_type: string
         tag_num: 2
         comment: | # notice leading blank lines will be trimmed.
-
-
-
           more comment on another field.
+      - name: t_uint64
+        data_type: fixed64
+        tag_num: 3
+      - name: t_uint32
+        data_type: fixed32
+        tag_num: 4
+      - name: t_int32
+        data_type: sint32
+        tag_num: 5
+      - name: t_bytes
+        data_type: bytes
+        tag_num: 6
+      - name: t_double
+        data_type: double
+        tag_num: 7
+      - name: t_sfixed64
+        data_type: sfixed64
+        tag_num: 8
 
   - name: AnotherRowStruct
     comment: |

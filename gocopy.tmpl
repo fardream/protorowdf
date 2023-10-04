@@ -1,0 +1,51 @@
+{{define "copy-struct"}}func New{{.CleanPluralName}}From{{.Name}}(values []*{{.Name}}) (*{{.CleanPluralName}}, error) {
+    n := len(values)
+    r := &{{.CleanPluralName}}{
+{{range .Fields}}        {{.GoPluralName}}: make([]{{.GoType}}, 0, n),
+{{end}}
+    }
+    for _, v := range values {
+{{range .Fields}}        r.{{.GoPluralName}} = append(r.{{.GoPluralName}}, v.{{.GoName}})
+{{end}}    }
+
+    return r, nil
+}
+
+func (s *{{.CleanPluralName}}) DataLength() int {
+    {{with .FirstField}}return len(s.{{.GoPluralName}}){{end}}
+}
+
+func (s *{{.CleanPluralName}}) ValidateLength() error {
+    n := s.DataLength()
+
+{{range .Fields}}    if len(v.{{.GoPluralName}}) != n {
+        return fmt.Error("%s/%s has a different length %d", "{{.Name}}","{{.GoPluralName}}", len(n))
+    }
+{{end}}
+    return nil
+}
+
+func New{{.Name}}SliceFrom{{.CleanPluralName}}(v *{{.CleanPluralName}}) ([]*{{.Name}}, error) {
+    err := v.ValidateLength()
+    if err != nil {
+        return nil, err
+    }
+
+    n := v.DataLength()
+
+    r := make([]*{{.Name}}, 0, n)
+
+    for i := 0; i < n; i++ {
+        r = append(r, &{{.Name}}{
+{{range .Fields}}            {{.GoName}}: v.{{.GoPluralName}}[i],
+{{end}}        })
+    }
+
+    return r, nil
+}
+{{end}}
+
+{{define "copy-for-file"}}package {{.GoPackageName}}
+
+{{range .Structs}}{{template "copy-struct" .}}{{end}}
+{{end}}

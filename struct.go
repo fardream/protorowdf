@@ -78,3 +78,11 @@ func (m *Struct) ValidTagNumbers() error {
 func (m *Struct) CleanPluralName() string {
 	return getPluralName(m)
 }
+
+func (m *Struct) FirstField() *Field {
+	if len(m.Fields) == 0 {
+		panic(fmt.Errorf("%s has no fields", m.Name))
+	}
+
+	return m.Fields[0]
+}

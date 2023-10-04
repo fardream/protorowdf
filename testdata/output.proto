@@ -17,6 +17,12 @@ message ARowStruct {
   int64 density = 1;
   // more comment on another field.
   string string_field = 2;
+  fixed64 t_uint64 = 3;
+  fixed32 t_uint32 = 4;
+  sint32 t_int32 = 5;
+  bytes t_bytes = 6;
+  double t_double = 7;
+  sfixed64 t_sfixed64 = 8;
 }
 
 // Plural Version of ARowStruct.
@@ -27,6 +33,12 @@ message ARowStructs {
   repeated int64 densities = 1;
   // more comment on another field.
   repeated string string_fields = 2;
+  repeated fixed64 t_uint64s = 3;
+  repeated fixed32 t_uint32s = 4;
+  repeated sint32 t_int32s = 5;
+  repeated bytes t_bytess = 6;
+  repeated double t_doubles = 7;
+  repeated sfixed64 t_sfixed64s = 8;
 }
 
 // This is another struct's comment.

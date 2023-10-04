@@ -111,3 +111,57 @@ func (t *SupportedType) UnmarshalJSON(b []byte) error {
 func (t *SupportedType) UnmarshalYAML(b []byte) error {
 	return t.dounmarshal(b, yaml.Unmarshal)
 }
+
+func (t SupportedType) GoType() (string, error) {
+	switch t {
+	case SupportedType_Bool:
+		return "bool", nil
+	case SupportedType_Bytes:
+		return "[]byte", nil
+	case SupportedType_Double:
+		return "float64", nil
+	case SupportedType_Fixed32, SupportedType_Uint32:
+		return "uint32", nil
+	case SupportedType_Fixed64, SupportedType_Uint64:
+		return "uint64", nil
+	case SupportedType_Float:
+		return "float32", nil
+	case SupportedType_Int32, SupportedType_Sfixed32, SupportedType_Sint32:
+		return "int32", nil
+	case SupportedType_Int64, SupportedType_Sfixed64, SupportedType_Sint64:
+		return "int64", nil
+	case SupportedType_String:
+		return "string", nil
+	case SupportedType_Unknown:
+		fallthrough
+	default:
+		return "", fmt.Errorf("unknown type: %d", t)
+	}
+}
+
+func (t SupportedType) RustType() (string, error) {
+	switch t {
+	case SupportedType_Bool:
+		return "bool", nil
+	case SupportedType_Bytes:
+		return "Vec<u8>", nil
+	case SupportedType_Double:
+		return "f64", nil
+	case SupportedType_Fixed32, SupportedType_Uint32:
+		return "u32", nil
+	case SupportedType_Fixed64, SupportedType_Uint64:
+		return "u64", nil
+	case SupportedType_Float:
+		return "f32", nil
+	case SupportedType_Int32, SupportedType_Sfixed32, SupportedType_Sint32:
+		return "i32", nil
+	case SupportedType_Int64, SupportedType_Sfixed64, SupportedType_Sint64:
+		return "i64", nil
+	case SupportedType_String:
+		return "String", nil
+	case SupportedType_Unknown:
+		fallthrough
+	default:
+		return "", fmt.Errorf("unknown type: %d", t)
+	}
+}

@@ -1,10 +1,21 @@
 package protorowdf
 
 import (
+	_ "embed"
 	"errors"
 	"io"
 	"strings"
+	"text/template"
 )
+
+//go:embed proto.tmpl
+var protoTemplateString string
+
+var protoTemplate *template.Template
+
+func init() {
+	protoTemplate = getOrPanic(template.New("proto-template").Parse(protoTemplateString))
+}
 
 func (f *ProtoFile) ValidateTagNumbers() error {
 	var errs []error

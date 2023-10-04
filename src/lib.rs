@@ -1,3 +1,5 @@
+pub mod copier;
+
 use std::{collections::HashMap, io::Write};
 
 use anyhow::anyhow;
@@ -194,6 +196,15 @@ impl<'de> Deserialize<'de> for SupportedType {
 }
 
 impl Field {
+    pub fn rust_need_clone(&self) -> &'static str {
+        if let Ok(t) = SupportedType::try_from(self.data_type) {
+            if t == SupportedType::String || t == SupportedType::Bytes {
+                return ".clone()";
+            }
+        }
+
+        ""
+    }
     pub fn write_plural_filed_definition<T: Write>(&self, w: &mut T) -> std::io::Result<()> {
         for aline in pretty_comment(&self.comment).iter() {
             writeln!(w, "{}//{}", self.indent, aline)?;
@@ -242,6 +253,10 @@ fn plural_name(name: &str, plural_name: &str) -> String {
 }
 
 impl Struct {
+    pub fn first_field(&self) -> &Field {
+        &self.fields[0]
+    }
+
     pub fn write_message_definition<T: Write>(&self, w: &mut T) -> std::io::Result<()> {
         for aline in pretty_comment(&self.comment).iter() {
             writeln!(w, "//{}", aline)?;

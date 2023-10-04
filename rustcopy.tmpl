@@ -1,0 +1,48 @@
+{{define "copy-struct"}}impl std::convert::TryFrom<&[{{.Name}}]> for {{.CleanPluralName}} {
+    type Error = &'static str;
+
+    fn try_from(value: &[{{.Name}}]) -> Result<Self, Self::Error> {
+        let mut r = Self::default();
+
+        for v in value.iter() {
+{{range .Fields}}            r.{{.CleanPluralName}}.push(v.{{.Name}}{{.RustNeedClone}});
+{{end}}        }
+
+        Ok(r)
+    }
+}
+impl {{.CleanPluralName}} {
+    pub fn data_length(&self) -> usize {
+        {{with .FirstField}}self.{{.CleanPluralName}}.len(){{end}}
+    }
+
+    pub fn validate_length(&self) -> Result<(), &'static str> {
+        let n = self.data_length();
+{{range .Fields}}        if self.{{.CleanPluralName}}.len() != n {
+            return Err("{{.Name}}/{{.CleanPluralName}} has a different length");
+        }
+{{end}}
+        Ok(())
+    }
+}
+impl std::convert::TryFrom<&{{.CleanPluralName}}> for Vec<{{.Name}}> {
+    type Error = &'static str;
+
+    fn try_from(value: &{{.CleanPluralName}}) -> Result<Self, Self::Error> {
+        value.validate_length()?;
+        let n = value.data_length();
+
+        let mut r = Vec::<{{.Name}}>::new();
+
+        for i in 0..n {
+            r.push({{.Name}} {
+{{range .Fields}}                {{.Name}}: value.{{.CleanPluralName}}[i]{{.RustNeedClone}},
+{{end}}            });
+        }
+
+        Ok(r)
+    }
+}
+{{end}}
+
+{{define "copy-for-file"}}{{.IncludeLine}}{{range .Structs}}{{template "copy-struct" .}}{{end}}{{end}}
