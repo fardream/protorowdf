@@ -6,7 +6,7 @@ require (
 	github.com/goccy/go-yaml v1.11.3
 	github.com/spf13/cobra v1.8.0
 	golang.org/x/text v0.14.0
-	google.golang.org/protobuf v1.32.0
+	google.golang.org/protobuf v1.34.0
 	mvdan.cc/gofumpt v0.6.0
 )
 
