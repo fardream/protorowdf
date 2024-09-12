@@ -5,7 +5,7 @@ go 1.21.1
 require (
 	github.com/goccy/go-yaml v1.11.3
 	github.com/spf13/cobra v1.8.1
-	golang.org/x/text v0.16.0
+	golang.org/x/text v0.18.0
 	google.golang.org/protobuf v1.34.2
 	mvdan.cc/gofumpt v0.6.0
 )
