@@ -6,7 +6,7 @@ toolchain go1.22.5
 require (
 	github.com/goccy/go-yaml v1.11.3
 	github.com/spf13/cobra v1.8.1
-	golang.org/x/text v0.18.0
+	golang.org/x/text v0.19.0
 	google.golang.org/protobuf v1.34.2
 	mvdan.cc/gofumpt v0.7.0
 )
