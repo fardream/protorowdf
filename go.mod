@@ -1,10 +1,8 @@
 module github.com/fardream/protorowdf
 
 go 1.21.1
-toolchain go1.24.1
-
 require (
-	github.com/goccy/go-yaml v1.15.23
+	github.com/goccy/go-yaml v1.17.1
 	github.com/spf13/cobra v1.9.1
 	golang.org/x/text v0.22.0
 	google.golang.org/protobuf v1.36.6
