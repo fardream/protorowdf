@@ -8,7 +8,7 @@ require (
 	github.com/goccy/go-yaml v1.18.0
 	github.com/spf13/cobra v1.9.1
 	golang.org/x/text v0.26.0
-	google.golang.org/protobuf v1.36.6
+	google.golang.org/protobuf v1.36.8
 	mvdan.cc/gofumpt v0.9.1
 )
 
