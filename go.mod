@@ -9,7 +9,7 @@ require (
 	github.com/spf13/cobra v1.10.1
 	golang.org/x/text v0.31.0
 	google.golang.org/protobuf v1.36.9
-	mvdan.cc/gofumpt v0.9.1
+	mvdan.cc/gofumpt v0.9.2
 )
 
 require (
